@@ -1,0 +1,3 @@
+deployment:
+  tasks:
+    - /usr/bin/rsync -av --delete ./ /home/nanom638/public_html/
