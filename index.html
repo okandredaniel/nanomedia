@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nanomedia — Soluções Web Inteligentes</title>
+    <meta
+      name="description"
+      content="Desenvolvimento web, hospedagem e soluções digitais sob medida. Sites, sistemas e automações para o seu negócio."
+    />
+    <meta name="theme-color" content="#0a090d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a090d;
+        --bg-card: #13111a;
+        --bg-card-hover: #1a1724;
+        --border: #221e2e;
+        --border-hover: #332d42;
+        --text: #f0ecf4;
+        --text-muted: #877f96;
+        --orange: #d47b30;
+        --rose: #ca4d5d;
+        --purple: #6c38a0;
+        --gradient-main: linear-gradient(135deg, #d47b30, #ca4d5d, #6c38a0);
+        --gradient-warm: linear-gradient(135deg, #d47b30, #ca4d5d);
+        --gradient-cool: linear-gradient(135deg, #ca4d5d, #6c38a0);
+        --gradient-glow: linear-gradient(
+          135deg,
+          rgba(212, 123, 48, 0.12),
+          rgba(202, 77, 93, 0.08),
+          rgba(108, 56, 160, 0.12)
+        );
+        --radius: 14px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Manrope', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      :focus-visible {
+        outline: 2px solid var(--orange);
+        outline-offset: 3px;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 1rem;
+        z-index: 1001;
+        background: var(--bg-card);
+        color: var(--text);
+        border: 1px solid var(--border-hover);
+        border-radius: 8px;
+        padding: 0.45rem 0.8rem;
+        text-decoration: none;
+        font-size: 0.82rem;
+      }
+      .skip-link:focus {
+        top: 1rem;
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      .gradient-text {
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        backdrop-filter: blur(24px);
+        background: rgba(10, 9, 13, 0.85);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+      .logo-svg {
+        height: 26px;
+        width: auto;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .nav-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-cta {
+        padding: 0.5rem 1.2rem;
+        background: var(--gradient-main);
+        color: #fff !important;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      .nav-cta:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8rem 2rem 4rem;
+        position: relative;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 800px;
+        background:
+          radial-gradient(
+            ellipse at 35% 40%,
+            rgba(212, 123, 48, 0.07) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 65% 60%,
+            rgba(108, 56, 160, 0.07) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(202, 77, 93, 0.04) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 1rem 0.4rem 0.7rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        animation: fadeUp 0.8s ease both;
+      }
+      .hero-badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gradient-warm);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
+
+      .hero h1 {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2.6rem, 6.5vw, 5rem);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.035em;
+        max-width: 750px;
+        animation: fadeUp 0.8s ease 0.1s both;
+      }
+      .hero p {
+        margin-top: 1.5rem;
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        max-width: 480px;
+        line-height: 1.75;
+        animation: fadeUp 0.8s ease 0.2s both;
+      }
+      .hero-actions {
+        margin-top: 2.5rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeUp 0.8s ease 0.3s both;
+      }
+
+      .btn-primary {
+        padding: 0.85rem 2.2rem;
+        background: var(--gradient-main);
+        color: #fff;
+        border: none;
+        border-radius: 100px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-family: 'Manrope', sans-serif;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 32px rgba(212, 123, 48, 0.2),
+          0 4px 16px rgba(108, 56, 160, 0.15);
+      }
+      .btn-ghost {
+        padding: 0.85rem 2.2rem;
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        font-size: 0.92rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-family: 'Manrope', sans-serif;
+      }
+      .btn-ghost:hover {
+        border-color: var(--text-muted);
+        color: var(--text);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .section-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+      }
+
+      .whatwedo {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .whatwedo-header {
+        margin-bottom: 3.5rem;
+      }
+      .whatwedo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+      }
+
+      .wd-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 2.25rem;
+        transition: all 0.35s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .wd-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-main);
+        opacity: 0;
+        transition: opacity 0.35s;
+      }
+      .wd-card:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-3px);
+      }
+      .wd-card:hover::after {
+        opacity: 1;
+      }
+
+      .wd-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        margin-bottom: 1.25rem;
+        font-size: 1.35rem;
+      }
+      .wd-icon.orange {
+        background: rgba(212, 123, 48, 0.12);
+        border: 1px solid rgba(212, 123, 48, 0.08);
+      }
+      .wd-icon.rose {
+        background: rgba(202, 77, 93, 0.12);
+        border: 1px solid rgba(202, 77, 93, 0.08);
+      }
+      .wd-icon.purple {
+        background: rgba(108, 56, 160, 0.12);
+        border: 1px solid rgba(108, 56, 160, 0.08);
+      }
+      .wd-icon.mix {
+        background: var(--gradient-glow);
+        border: 1px solid rgba(202, 77, 93, 0.08);
+      }
+
+      .wd-card h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .wd-card p {
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      .solutions {
+        padding: 6rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .solutions-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .solutions-header {
+        margin-bottom: 3.5rem;
+      }
+      .sol-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .sol-item {
+        display: grid;
+        grid-template-columns: 4rem 1fr;
+        gap: 1.75rem;
+        align-items: start;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 2rem 2.25rem;
+        transition: all 0.35s ease;
+      }
+      .sol-item:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+      }
+      .sol-number {
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0.5;
+      }
+      .sol-content h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .sol-content p {
+        font-size: 0.87rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+      .sol-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.85rem;
+      }
+      .sol-tag {
+        padding: 0.25rem 0.7rem;
+        background: rgba(108, 56, 160, 0.1);
+        border: 1px solid rgba(108, 56, 160, 0.12);
+        border-radius: 100px;
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .tech-bar {
+        padding: 2.5rem 2rem;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .tech-bar-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tech-bar span {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 600;
+        opacity: 0.4;
+        transition: opacity 0.3s;
+      }
+      .tech-bar span:hover {
+        opacity: 1;
+      }
+
+      .about {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      .about-text p {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+      .about-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        text-align: center;
+        transition: border-color 0.3s;
+      }
+      .stat-card:hover {
+        border-color: var(--border-hover);
+      }
+      .stat-card .number {
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1;
+        background: var(--gradient-main);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .stat-card .label {
+        font-size: 0.76rem;
+        color: var(--text-muted);
+        margin-top: 0.4rem;
+        font-weight: 500;
+      }
+
+      .contact {
+        padding: 6rem 2rem;
+        max-width: 660px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .contact .section-title {
+        margin-bottom: 0.75rem;
+      }
+      .contact-subtitle {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        max-width: 400px;
+        margin: 0 auto;
+        line-height: 1.65;
+      }
+
+      .contact-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 2.5rem;
+        margin-top: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-main);
+      }
+      .contact-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .contact-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 0.9rem;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .contact-link:hover {
+        border-color: var(--orange);
+        background: rgba(212, 123, 48, 0.06);
+      }
+      .contact-link svg {
+        width: 19px;
+        height: 19px;
+        flex-shrink: 0;
+      }
+      .contact-link.whatsapp:hover {
+        border-color: #25d366;
+        background: rgba(37, 211, 102, 0.06);
+      }
+
+      .partner-section {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .partner-section p {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-bottom: 0.6rem;
+      }
+      .partner-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+      .partner-badge strong {
+        background: var(--gradient-cool);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .partner-badge:hover {
+        border-color: var(--purple);
+        color: var(--text);
+      }
+
+      footer {
+        padding: 2.5rem 2rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+      }
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      footer p {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+      .footer-location {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        opacity: 0.6;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 0.85rem 1.25rem;
+        }
+        .nav-links {
+          gap: 1rem;
+        }
+        .nav-links a:not(.nav-cta) {
+          display: none;
+        }
+        .whatwedo-grid {
+          grid-template-columns: 1fr;
+        }
+        .sol-item {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .sol-number {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .about {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .contact-card {
+          padding: 2rem 1.5rem;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+    <header>
+      <nav aria-label="Navegação principal">
+        <a href="#inicio" class="logo-link" aria-label="Nanomedia - início">
+          <svg
+            class="logo-svg"
+            viewBox="0 0 812.1 180.2"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <linearGradient
+                id="lg"
+                x1="771.4"
+                y1="124"
+                x2="827"
+                y2="124"
+                gradientTransform="matrix(1,0,0,-1,0,280)"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0.15" stop-color="#d47b30" />
+                <stop offset="0.85" stop-color="#ca4d5d" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="#fefefe"
+              d="M14.9,10.1H65.7V33.4h0.7a40.7,40.7,0,0,1,7.1-9.9,53.15,53.15,0,0,1,10.9-8.8A64.19,64.19,0,0,1,98.9,8.3a61.85,61.85,0,0,1,17.6-2.5c13.4,0,24.2,2.1,32.5,6.2a47,47,0,0,1,19.2,17.1,70.1,70.1,0,0,1,9.4,25.8A201.06,201.06,0,0,1,180.1,87v94.6H127.2v-84c0-4.9-.2-10.1-0.5-15.4a48,48,0,0,0-3.2-14.6,25.46,25.46,0,0,0-8.1-10.9c-3.7-2.8-8.9-4.2-15.7-4.2s-12.4,1.2-16.6,3.7a25.6,25.6,0,0,0-9.7,9.9A41.21,41.21,0,0,0,69,80a121.24,121.24,0,0,0-1.1,16.2v85.4h-53V10.1Zm303.2,150h-0.7a49.72,49.72,0,0,1-23.5,19.8,81,81,0,0,1-30.9,6,77.35,77.35,0,0,1-23.1-3.4,57.92,57.92,0,0,1-19.6-10.1,49.38,49.38,0,0,1-13.4-16.6c-3.3-6.6-4.9-14.2-4.9-22.9,0-9.9,1.8-18.2,5.5-25.1a48.22,48.22,0,0,1,14.8-16.9,73.43,73.43,0,0,1,21.4-10.4A155.2,155.2,0,0,1,268.6,75a224.27,224.27,0,0,1,25.8-2.1c8.6-.2,16.5-0.4,23.8-0.4,0-9.4-3.4-16.9-10.1-22.4a36.32,36.32,0,0,0-23.8-8.3,51.17,51.17,0,0,0-23.8,5.5,64.15,64.15,0,0,0-19.2,15L213.1,33.4a95.45,95.45,0,0,1,34.6-20.6,123.27,123.27,0,0,1,40.9-6.9c15.5,0,28.3,1.9,38.3,5.8s18,9.6,24,17.1,10.2,16.8,12.5,27.7a185.29,185.29,0,0,1,3.5,37.9v87.2H318.2V160.1h-0.1ZM305,106.5c-4,0-9,.2-15,0.5a81.28,81.28,0,0,0-17.3,3,38,38,0,0,0-14.1,7.4c-3.9,3.3-5.8,7.9-5.8,13.8q0,9.6,8.1,14.1a33.6,33.6,0,0,0,16.9,4.6,53.3,53.3,0,0,0,15-2.1,45,45,0,0,0,12.9-6,28.47,28.47,0,0,0,9-9.9,28.84,28.84,0,0,0,3.4-14.1V106.5H305Zm87.9-96.4h50.8V33.4h0.7a40.7,40.7,0,0,1,7.1-9.9,53.15,53.15,0,0,1,10.9-8.8,64.19,64.19,0,0,1,14.5-6.4,61.85,61.85,0,0,1,17.6-2.5c13.4,0,24.2,2.1,32.5,6.2a47,47,0,0,1,19.2,17.1,70.1,70.1,0,0,1,9.4,25.8A201.06,201.06,0,0,1,558.1,87v94.6H505.2v-84c0-4.9-.2-10.1-0.5-15.4a48,48,0,0,0-3.2-14.6,25.46,25.46,0,0,0-8.1-10.9c-3.7-2.8-8.9-4.2-15.7-4.2s-12.4,1.2-16.6,3.7a25.6,25.6,0,0,0-9.7,9.9A41.21,41.21,0,0,0,447,80a121.24,121.24,0,0,0-1.1,16.2v85.4H393V10.1h-0.1ZM582.1,95.9a91,91,0,0,1,7.4-37.1,84.3,84.3,0,0,1,20.3-28.4,90.25,90.25,0,0,1,30.4-18.2,108.9,108.9,0,0,1,37.2-6.4,106.15,106.15,0,0,1,37.2,6.4A89.61,89.61,0,0,1,745,30.4a85.3,85.3,0,0,1,20.3,28.4,90.68,90.68,0,0,1,7.4,37.1,91,91,0,0,1-7.4,37.1A84.3,84.3,0,0,1,745,161.4a90.25,90.25,0,0,1-30.4,18.2,108.9,108.9,0,0,1-37.2,6.4,106.15,106.15,0,0,1-37.2-6.4,89.61,89.61,0,0,1-30.4-18.2A84.3,84.3,0,0,1,589.5,133,91,91,0,0,1,582.1,95.9Zm52.9,0c0,12.9,3.7,23.4,11.1,31.4s17.8,12,31.2,12,23.8-4,31.2-12,11.1-18.5,11.1-31.4-3.7-23.4-11.1-31.4-17.8-12-31.2-12-23.8,4-31.2,12S635,83,635,95.9Z"
+              transform="translate(-14.9 -5.8)"
+            />
+            <path
+              fill="url(#lg)"
+              d="M771.4,156a28.59,28.59,0,0,1,2.1-10.9,26.87,26.87,0,0,1,14.8-14.8,28.22,28.22,0,0,1,10.9-2.1,29,29,0,0,1,10.9,2.1,26.87,26.87,0,0,1,14.8,14.8,29.34,29.34,0,0,1,0,21.8,26.87,26.87,0,0,1-14.8,14.8,29.34,29.34,0,0,1-21.8,0,26.87,26.87,0,0,1-14.8-14.8A29,29,0,0,1,771.4,156Z"
+              transform="translate(-14.9 -5.8)"
+            />
+          </svg>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato" class="nav-cta">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-badge">
+          <span class="dot"></span> Disponível para novos projetos
+        </div>
+        <h1 id="hero-title">
+          Criamos experiências digitais
+          <span class="gradient-text">para o mundo conectado</span>
+        </h1>
+        <p>
+          Design, desenvolvimento e automações inteligentes para empresas que
+          querem crescer online sem complicação.
+        </p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn-primary">Iniciar conversa</a>
+          <a href="#servicos" class="btn-ghost">Ver serviços</a>
+        </div>
+      </section>
+
+      <section class="whatwedo" id="servicos">
+        <div class="whatwedo-header reveal">
+          <div class="section-label">O que fazemos</div>
+          <h2 class="section-title">Do conceito ao ar,<br />sem dor de cabeça</h2>
+        </div>
+        <div class="whatwedo-grid">
+          <article class="wd-card reveal">
+            <div class="wd-icon orange" aria-hidden="true">🎨</div>
+            <h3>UX &amp; Web Design</h3>
+            <p>
+              Design centrado no utilizador com foco em conversão. Sites
+              responsivos, landing pages e interfaces que proporcionam
+              experiências memoráveis.
+            </p>
+          </article>
+          <article class="wd-card reveal reveal-delay-1">
+            <div class="wd-icon purple" aria-hidden="true">⚙️</div>
+            <h3>Desenvolvimento Web</h3>
+            <p>
+              Full stack development com tecnologias modernas. De sites
+              institucionais a aplicações complexas com integrações e APIs.
+            </p>
+          </article>
+          <article class="wd-card reveal reveal-delay-2">
+            <div class="wd-icon rose" aria-hidden="true">📱</div>
+            <h3>Apps Web &amp; Mobile</h3>
+            <p>
+              Aplicações web progressivas e mobile. Sistemas de gestão,
+              dashboards e plataformas SaaS escaláveis na cloud.
+            </p>
+          </article>
+          <article class="wd-card reveal reveal-delay-3">
+            <div class="wd-icon mix" aria-hidden="true">🤖</div>
+            <h3>Automações com IA</h3>
+            <p>
+              Automatize processos, integre ferramentas e potencialize o seu
+              negócio com inteligência artificial e workflows inteligentes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+    <section class="solutions" id="solucoes">
+      <div class="solutions-inner">
+        <div class="solutions-header reveal">
+          <div class="section-label">Soluções</div>
+          <h2 class="section-title">Como podemos ajudar</h2>
+        </div>
+        <ol class="sol-list">
+          <li class="sol-item reveal">
+            <div class="sol-number">01</div>
+            <div class="sol-content">
+              <h3>Aplicações Web &amp; Mobile</h3>
+              <p>
+                De aplicativos a projetos com grande volume de tráfego. Criamos
+                plataformas digitais, serviços e produtos que ampliam as ofertas
+                do seu negócio de forma inovadora e escalável.
+              </p>
+              <div class="sol-tags">
+                <span class="sol-tag">SaaS</span><span class="sol-tag">PWA</span
+                ><span class="sol-tag">API REST</span
+                ><span class="sol-tag">Cloud</span>
+              </div>
+            </div>
+          </li>
+          <li class="sol-item reveal">
+            <div class="sol-number">02</div>
+            <div class="sol-content">
+              <h3>Consultoria &amp; Produto Digital</h3>
+              <p>
+                Análise de viabilidade, benchmarking e priorização de
+                funcionalidades para negócios digitais em fase inicial ou de
+                MVP. Tiramos o seu projeto do papel e transformamos numa solução
+                viável.
+              </p>
+              <div class="sol-tags">
+                <span class="sol-tag">Lean Canvas</span
+                ><span class="sol-tag">MVP</span
+                ><span class="sol-tag">Product Discovery</span>
+              </div>
+            </div>
+          </li>
+          <li class="sol-item reveal">
+            <div class="sol-number">03</div>
+            <div class="sol-content">
+              <h3>Hospedagem &amp; Infraestrutura</h3>
+              <p>
+                Hospedagem confiável, e-mails profissionais, certificado SSL,
+                domínios e suporte técnico. Toda a infraestrutura web do seu
+                negócio num só lugar.
+              </p>
+              <div class="sol-tags">
+                <span class="sol-tag">Hosting</span
+                ><span class="sol-tag">SSL</span
+                ><span class="sol-tag">E-mail</span
+                ><span class="sol-tag">DNS</span>
+              </div>
+            </div>
+          </li>
+          <li class="sol-item reveal">
+            <div class="sol-number">04</div>
+            <div class="sol-content">
+              <h3>Conteúdo &amp; Estratégia Digital</h3>
+              <p>
+                Fotografia, vídeo e design gráfico aliados a estratégias de
+                presença online que geram resultados mensuráveis e novas
+                oportunidades a partir de dados.
+              </p>
+              <div class="sol-tags">
+                <span class="sol-tag">Fotografia</span
+                ><span class="sol-tag">Vídeo</span
+                ><span class="sol-tag">SEO</span
+                ><span class="sol-tag">Analytics</span>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="tech-bar reveal">
+      <div class="tech-bar-inner">
+        <span>React</span><span>Next.js</span><span>Node.js</span
+        ><span>TypeScript</span><span>Python</span><span>PostgreSQL</span
+        ><span>WordPress</span><span>AWS</span><span>Stripe</span
+        ><span>OpenAI</span>
+      </div>
+    </div>
+
+    <section class="about reveal" id="sobre">
+      <div class="about-text">
+        <div class="section-label">Sobre</div>
+        <h2 class="section-title">Experiência que entrega</h2>
+        <p>
+          A Nanomedia é um estúdio digital com mais de 15 anos de experiência em
+          desenvolvimento web, UX design e produção de conteúdo.
+        </p>
+        <p>
+          Trabalhamos com empresas de todos os tamanhos, de freelancers que
+          precisam de um site profissional a startups que precisam de
+          plataformas robustas e escaláveis.
+        </p>
+        <p>
+          Com atuação entre Brasil e Portugal, combinamos agilidade, qualidade
+          técnica e visão de produto.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="number">15+</div>
+          <div class="label">Anos de experiência</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">BR</div>
+          <div class="label">&amp; Portugal</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">Full</div>
+          <div class="label">Stack development</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">∞</div>
+          <div class="label">Café consumido</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact reveal" id="contato">
+      <div class="section-label">Contato</div>
+      <h2 class="section-title">Em que podemos ajudar?</h2>
+      <p class="contact-subtitle">
+        Tem uma ideia de projeto? Quer um orçamento ou só dizer um oi? Fale
+        connosco.
+      </p>
+      <div class="contact-card">
+        <div class="contact-methods">
+          <a
+            href="https://wa.me/351XXXXXXXXX"
+            class="contact-link whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              />
+            </svg>
+            WhatsApp
+          </a>
+          <a href="mailto:contato@nanomedia.com.br" class="contact-link">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            contato@nanomedia.com.br
+          </a>
+        </div>
+        <div class="partner-section">
+          <p>Parceiro oficial</p>
+          <a
+            href="https://keevo.pt"
+            class="partner-badge"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Powered by <strong>Keevo</strong> →</a
+          >
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <p>&copy; 2025 Nanomedia. Todos os direitos reservados.</p>
+        <span class="footer-location">Brasil &amp; Portugal</span>
+      </div>
+    </footer>
+
+    <script>
+      const revealItems = document.querySelectorAll('.reveal');
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        revealItems.forEach((item) => item.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+          },
+          { threshold: 0.08 },
+        );
+        revealItems.forEach((item) => observer.observe(item));
+      }
+    </script>
+  </body>
+</html>
